@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* ─── Theme tokens (Tailwind v4 @theme) ──────────────────────────── */
+@theme {
+  --font-sans: "Lexend", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+}
+
+/* ─── Base typography ────────────────────────────────────────────── */
+html {
+  font-size: 17px;          /* slightly larger than browser default */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  background: linear-gradient(180deg, #fffaf3 0%, #fef6ec 100%);
+  background-attachment: fixed;
+  color: #1c1917;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.015em;
+}
+
+/* Pink focus ring */
+:focus-visible {
+  outline: 3px solid #f43f5e;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.scrollbar-none { scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+
+/* ════════════════════════════════════════════════════════════════
+   ACCESSIBILITY SETTINGS — driven by data-attributes on <html>
+   ════════════════════════════════════════════════════════════════ */
+
+/* Text size scaling */
+html[data-text-size="small"]   { font-size: 15px; }
+html[data-text-size="default"] { font-size: 17px; }
+html[data-text-size="large"]   { font-size: 19px; }
+html[data-text-size="xlarge"]  { font-size: 22px; }
+
+/* High contrast mode */
+html[data-high-contrast="true"] body {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+html[data-high-contrast="true"] *,
+html[data-high-contrast="true"] *::before,
+html[data-high-contrast="true"] *::after {
+  border-color: #000000 !important;
+}
+html[data-high-contrast="true"] .hc-card {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: none !important;
+}
+html[data-high-contrast="true"] .hc-text-muted {
+  color: #000000 !important;
+}
+html[data-high-contrast="true"] [class*="bg-rose-4"],
+html[data-high-contrast="true"] [class*="bg-rose-5"],
+html[data-high-contrast="true"] [class*="bg-pink-4"],
+html[data-high-contrast="true"] [class*="bg-pink-5"] {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+html[data-high-contrast="true"] a:not([class*="bg-"]) {
+  color: #0000ee !important;
+  text-decoration: underline !important;
+}
+
+/* Reduce motion */
+html[data-reduce-motion="true"] *,
+html[data-reduce-motion="true"] *::before,
+html[data-reduce-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Underline all links */
+html[data-underline-links="true"] a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
+/* Increased letter + line spacing (helps dyslexia) */
+html[data-spacing="true"] body {
+  letter-spacing: 0.04em;
+  line-height: 1.85;
+  word-spacing: 0.12em;
+}
+
+/* Honor OS-level reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
