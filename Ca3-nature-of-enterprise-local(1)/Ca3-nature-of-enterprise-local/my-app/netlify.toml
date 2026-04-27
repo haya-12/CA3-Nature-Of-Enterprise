@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = ".next"  # or "out" if using static export
+
+[build.environment]
+  NODE_VERSION = "20.9.0"  # required for Next.js 16
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
