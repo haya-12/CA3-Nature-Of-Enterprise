@@ -1,0 +1,4 @@
+Our machine learning feature is a simple subject clustering system built into the app. It takes the subject data from the database and groups similar subjects together into categories.
+Instead of using a complex model, the system looks at keywords in each subject name. For example, subjects that contain words like “programming” are grouped under Programming, “web” goes under Web Development, and topics like “machine learning” or “AI” are grouped under Artificial Intelligence. Business and math’s related subjects are also grouped in a similar way.
+We chose this method because it is simple and works well with a small dataset like ours. It also clearly shows how data can be processed and turned into useful insights inside an application.
+The feature is fully integrated into the app as a page, so users can view how subjects are grouped in real time.
