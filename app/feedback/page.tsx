@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import ProtectedPage from "../_components/ProtectedPage";
 import { useAuth } from "../_components/AuthProvider";
 
@@ -12,21 +12,20 @@ export default function FeedbackPage() {
   const [subject,  setSubject]  = useState("");
   const [message,  setMessage]  = useState("");
   const [rating,   setRating]   = useState(0);
-  const [hovered,  setHovered]  = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [loading,   setLoading]   = useState(false);
   const [errors,    setErrors]    = useState<Record<string, string>>({});
 
   function validate() {
     const e: Record<string, string> = {};
-    if (!category)            e.category = "Please select a category.";
-    if (!subject.trim())      e.subject  = "Please enter a subject.";
-    if (!message.trim())      e.message  = "Please enter your feedback.";
-    if (rating === 0)         e.rating   = "Please give a star rating.";
+    if (!category)        e.category = "Please select a category.";
+    if (!subject.trim())  e.subject  = "Please enter a subject.";
+    if (!message.trim())  e.message  = "Please enter your feedback.";
+    if (rating === 0)     e.rating   = "Please give a star rating.";
     return e;
   }
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
@@ -121,11 +120,9 @@ export default function FeedbackPage() {
                   aria-checked={rating === star}
                   aria-label={`${star} star${star > 1 ? "s" : ""}`}
                   onClick={() => setRating(star)}
-                  onMouseEnter={() => setHovered(star)}
-                  onMouseLeave={() => setHovered(0)}
-                  className="text-4xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 rounded-lg p-1 transition-transform hover:scale-110 min-w-[44px] min-h-[44px]"
+                  className="text-4xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 rounded-lg p-1 min-w-[44px] min-h-[44px]"
                 >
-                  {star <= (hovered || rating) ? "⭐" : "☆"}
+                  {star <= rating ? "⭐" : "☆"}
                 </button>
               ))}
             </div>
